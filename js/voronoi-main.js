@@ -200,11 +200,10 @@
     ext: 'png'
   }).addTo(map);
 
-  // add logo container to map
-  L.control.voronoiLogo({
-    position: 'bottomright'
-  }).addTo(map);
-
+  if (!L.Browser.touch) {
+    // add logo container to map
+    L.control.voronoiLogo({ position: 'bottomright' }).addTo(map);
+  }
   // add voronoi legend to the map
   L.control.voronoiLegend({ position: 'bottomright' }).addTo(map);
 

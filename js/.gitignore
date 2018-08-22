@@ -1,0 +1,22 @@
+# Mac files
+.DS_Store
+
+# demo data
+*.json
+*.geojson
+*.log
+*.png
+*.gif
+*.out
+log
+*.grib*
+*.csv
+
+# config data
+.env
+.python-version
+config.*
+*.pyc
+
+# cache
+__pycache__

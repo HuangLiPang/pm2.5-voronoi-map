@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>LASS: Voronoi Diagram of PM2.5 Stations</title>
+  <link rel="shortcut icon" href="LASS.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="300">
+  <meta property="og:description" content="LASS: Voronoi Diagram of PM2.5 Stations" />
+  <meta property="og:title" content="LASS: Voronoi Diagram of PM2.5 Stations" />
+  <meta property="og:type" content="LASS" />
+  <meta property="og:url" content="https://pm25.lass-net.org/GIS/voronoi/" />
+  <meta property="og:site_name" content="LASS: Voronoi Diagram of PM2.5 Stations" />
+  <!-- leaflet css -->
+  <link type="text/css" rel="stylesheet" href="leaflet/leaflet.css" />
+  <!-- voronoi map css -->
+  <link type="text/css" rel="stylesheet" href="css/voronoi-map.css"/>
+
+  <!-- d3js library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.8/d3.min.js"></script>
+  <!-- leaflet library -->
+  <script src="leaflet/leaflet.js"></script>
+  <script src="js/voronoi-logo.js"></script>
+  <script src="js/voronoi-legend.js"></script>
+</head>
+<body>
+  <div id='map'></div>
+  <!-- AirBox selection menu -->
+  <div id='selections' class="selections">
+    <a href='#' class="show">Choose data source</a>
+    <div class='content'>
+      <a href='#' class="hide">Hide</a>
+      <div id="toggles"></div>
+    </div>
+  </div>
+  <div id='loading'></div>
+  <!-- selected airbox ID -->
+  <div id='selected'>
+    <table border=0>
+      <tr valign="bottom">
+        <td>
+          <h1>PM2.5 Map</h1>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <script src="js/voronoi-main.js"></script>
+</body>
+</html>

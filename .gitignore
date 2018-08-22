@@ -18,5 +18,9 @@ log
 config.*
 *.pyc
 
+# img
+*.png
+*.ico
+
 # cache
 __pycache__

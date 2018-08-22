@@ -177,7 +177,7 @@
   // leaflet map
   let map;
   let Stamen_TonerLite;
-  let url = 'data/data.csv';
+  let url = "data/data.csv";
   let initialSelection = d3.set(
     ['AirBox', 'AirBox2', 'AirBoxK', 'ASLUNG',
       'Indie', 'LASS', 'MAPS', 'RESCUE',
@@ -201,11 +201,51 @@
   }).addTo(map);
 
   if (!L.Browser.touch) {
-    // add logo container to map
-    L.control.voronoiLogo({ position: 'bottomright' }).addTo(map);
+    Promise
+      .resolve(makeRequest("GET", url))
+      .then(xhr => {
+        // add logo conainer to map
+        L.control.voronoiLogo({
+          position: "bottomright",
+          "latest-updated-time": xhr.getResponseHeader("Last-Modified")
+        }).addTo(map);
+        // add voronoi legend to the map
+        L.control.voronoiLegend({ position: 'bottomright' }).addTo(map);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+    // make request function in promise
+    // for getting the csv update time
+    function makeRequest(method, url) {
+      return new Promise(function(resolve, reject) {
+        let xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+        xhr.onload = function() {
+          if (this.status >= 200 && this.status < 300) {
+            resolve(xhr);
+          } else {
+            reject({
+              status: this.status,
+              statusText: xhr.statusText
+            });
+          }
+        };
+        xhr.onerror = function() {
+          reject({
+            status: this.status,
+            statusText: xhr.statusText
+          });
+        };
+        xhr.send();
+      });
+    }
+  } else {
+    // ensure voronoi legend is loaded after logo
+    // add voronoi legend to the map
+    L.control.voronoiLegend({ position: 'bottomright' }).addTo(map);
   }
-  // add voronoi legend to the map
-  L.control.voronoiLegend({ position: 'bottomright' }).addTo(map);
 
   // voronoi map
   voronoiMap(map, url, initialSelection);
